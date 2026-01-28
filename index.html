@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>М'ясна Лавка — Преміальна М'ясна Продукція</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary-red: #C41E3A;
             --deep-black: #0F0F0F;
             --dark-grey: #1A1A1A;
             --medium-grey: #333333;
-            --paper-bg: #F4F1EA;
+            /* Газетна палітра */
+            --paper-bg: #F4F1EA; 
             --paper-darker: #E8E4D8;
             --white: #FFFFFF;
         }
@@ -26,12 +25,13 @@
 
         html {
             scroll-behavior: smooth;
-            background-color: var(--paper-bg);
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
+            /* Колір газети та легка текстура паперу */
             background-color: var(--paper-bg);
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
             color: var(--deep-black);
             line-height: 1.6;
         }
@@ -42,7 +42,7 @@
             padding: 0 20px;
         }
 
-        /* HEADER */
+        /* --- MODERN HEADER --- */
         header {
             background: var(--deep-black);
             padding: 20px 0;
@@ -62,9 +62,12 @@
             font-family: 'Bitter', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: white;
+            color: var(--white);
             text-transform: uppercase;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .main-logo span {
@@ -78,30 +81,43 @@
         }
 
         .nav-links a {
-            color: white;
             text-decoration: none;
+            color: var(--white);
+            font-weight: 400;
             font-size: 0.8rem;
-            letter-spacing: 2px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--primary-red);
         }
 
-        /* HERO */
+        /* --- HERO SECTION --- */
         .hero {
-            min-height: 100vh;
-            background:
-                linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-                url('https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1600');
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1600');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content p.subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            color: var(--primary-red);
         }
 
         .hero-content h1 {
@@ -109,27 +125,33 @@
             font-size: clamp(2.5rem, 8vw, 5rem);
             margin-bottom: 30px;
             text-transform: uppercase;
+            line-height: 1;
         }
 
         .btn-primary {
             display: inline-block;
             padding: 18px 50px;
             background: var(--primary-red);
-            color: white;
+            color: var(--white);
             text-decoration: none;
             font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             border: 2px solid var(--primary-red);
-            transition: 0.3s;
         }
 
         .btn-primary:hover {
             background: transparent;
+            color: var(--white);
+            transform: translateY(-5px);
         }
 
-        /* CONTENT */
+        /* --- CONTENT SECTION --- */
         .content-section {
             padding: 120px 0;
-            background: var(--paper-bg);
+            /* Фон прозорий, щоб бачити колір газети */
+            background: transparent;
         }
 
         .grid-article {
@@ -142,114 +164,225 @@
         .article-text h2 {
             font-family: 'Bitter', serif;
             font-size: 3rem;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            line-height: 1.1;
         }
 
         .article-text p {
-            color: var(--medium-grey);
             font-size: 1.1rem;
+            color: var(--medium-grey);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .article-image {
+            position: relative;
+            background: var(--deep-black);
         }
 
         .article-image img {
             width: 100%;
             display: block;
+            transition: 0.5s ease;
         }
 
-        /* AD FEATURE */
+        .article-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-red);
+            z-index: -1;
+        }
+
+        /* --- ADVERTISEMENT BLOCK --- */
         .ad-feature {
             background: var(--deep-black);
+            color: var(--white);
             padding: 100px 0;
+            overflow: hidden;
         }
 
         .ad-container {
-            background: var(--dark-grey);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            align-items: center;
             gap: 60px;
+            background: var(--dark-grey);
             padding: 40px;
             border-left: 10px solid var(--primary-red);
-            align-items: center;
         }
 
-        .ad-container img {
+        .ad-image-big {
+            flex: 1;
+            height: 500px;
+            background: #222;
+            overflow: hidden;
+        }
+
+        .ad-image-big img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        .ad-content-big {
+            flex: 1;
+        }
+
         .ad-content-big h2 {
             font-family: 'Bitter', serif;
-            font-size: 3rem;
-            color: white;
-            margin: 15px 0;
-        }
-
-        .price-tag {
             font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            color: var(--white);
         }
 
-        /* CATALOG */
+        .ad-content-big .price-tag {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        /* --- CATALOG GRID --- */
         .catalog {
             padding: 120px 0;
-            background: var(--paper-darker);
+            background: var(--paper-darker); /* Трохи темніший відтінок паперу */
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .section-header h2 {
+            font-family: 'Bitter', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 80px;
+            text-transform: uppercase;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .product-card {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--white);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05); /* Легка рамка як у вирізці */
         }
 
-        .card-img img {
-            width: 100%;
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
             height: 300px;
-            object-fit: cover;
+            overflow: hidden;
         }
 
         .card-body {
             padding: 30px;
         }
 
-        /* CONTACT */
-        .contact-section {
-            background: var(--deep-black);
-            color: white;
-            padding: 120px 0;
+        .card-body h3 {
+            font-family: 'Bitter', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
 
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .btn-buy {
+            background: var(--deep-black);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-red);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 120px 0;
+            background: var(--deep-black);
+            color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444;
+            padding: 15px 0;
+            color: var(--white);
+            margin-bottom: 30px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        /* --- FOOTER --- */
         footer {
             background: #080808;
             color: #666;
-            text-align: center;
             padding: 60px 0;
+            text-align: center;
         }
 
-        @media (max-width: 900px) {
-            .grid-article,
-            .ad-container {
-                grid-template-columns: 1fr;
-            }
+        /* AOS Animation Mockup */
+        [data-aos] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 968px) {
+            .grid-article, .ad-container, .contact-grid { grid-template-columns: 1fr; }
+            .ad-image-big { height: 300px; }
         }
     </style>
 </head>
-
 <body>
 
 <header>
     <div class="container">
         <nav>
-            <a class="main-logo">М'ясна <span>Лавка</span></a>
+            <a href="#" class="main-logo">М'ясна <span>Лавка</span></a>
             <ul class="nav-links">
                 <li><a href="#about">Філософія</a></li>
-                <li><a href="#ad">Пропозиція</a></li>
+                <li><a href="#ad-promo">Пропозиція</a></li>
                 <li><a href="#catalog">Асортимент</a></li>
                 <li><a href="#contact">Контакти</a></li>
             </ul>
@@ -257,70 +390,147 @@
     </div>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Досконалість у кожному відрубі</h1>
-        <a href="#catalog" class="btn-primary">Замовити зараз</a>
-    </div>
-</section>
-
-<section class="content-section" id="about">
-    <div class="container grid-article">
-        <div class="article-text">
-            <h2>Ми знаємо про м'ясо все</h2>
-            <p>Контроль якості від ферми до вашого столу. Витримка, відбір та безкомпромісна якість.</p>
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="subtitle">PREMIUM SELECTION</p>
+            <h1>Досконалість у кожному відрубі</h1>
+            <a href="#catalog" class="btn-primary">Замовити зараз</a>
         </div>
-        <div class="article-image">
-            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=800" alt="Мʼясо">
-        </div>
-    </div>
-</section>
+    </section>
 
-<section class="ad-feature" id="ad">
-    <div class="container">
-        <div class="ad-container">
-            <img src="https://cdn.pixabay.com/photo/2022/01/20/15/11/t-bone-steak-6950611_1280.jpg" alt="T-Bone Steak">
-            <div class="ad-content-big">
-                <span style="color:#C41E3A; font-weight:800; letter-spacing:3px;">
-                    ПРОПОЗИЦІЯ ТИЖНЯ
-                </span>
-                <h2>T-BONE DRY AGED</h2>
-                <div class="price-tag">
-                    580 <small style="font-size:0.4em;">ГРН/КГ</small>
+    <section class="content-section" id="about">
+        <div class="container">
+            <div class="grid-article" data-aos>
+                <div class="article-text">
+                    <h2>Ми знаємо про м'ясо все</h2>
+                    <p>Наша історія розпочалася з пристрасті до ідеального смаку. Ми керуємо процесом відбору та дозрівання кожного шматка.</p>
+                    <div style="margin-top: 40px; display: flex; gap: 40px;">
+                        <div>
+                            <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary-red); display: block;">28</span>
+                            <span style="font-size: 0.8rem; text-transform: uppercase;">Днів витримки</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary-red); display: block;">100%</span>
+                            <span style="font-size: 0.8rem; text-transform: uppercase;">Natural Feed</span>
+                        </div>
+                    </div>
                 </div>
-                <a href="#contact" class="btn-primary" style="background:white;color:#0F0F0F;">
-                    Бронювати
-                </a>
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=800" alt="Свіжа яловичина">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="catalog" id="catalog">
-    <div class="container product-grid">
-        <div class="product-card">
-            <div class="card-img">
-                <img src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800" alt="Рібай">
-            </div>
-            <div class="card-body">
-                <h3>Рібай</h3>
-                <p>450 грн/кг</p>
+    <section class="ad-feature" id="ad-promo">
+        <div class="container">
+            <div class="ad-container" data-aos>
+                <div class="ad-image-big">
+                    <img src="https://images.unsplash.com/photo-1546248136-24b0ca4479ed?q=80&w=1200" alt="T-Bone Steak">
+                </div>
+                <div class="ad-content-big">
+                    <span style="color:var(--primary-red); font-weight:800; letter-spacing:3px;">ПРОПОЗИЦІЯ ТИЖНЯ</span>
+                    <h2>T-BONE DRY AGED</h2>
+                    <div class="price-tag">580 <small style="font-size: 0.4em;">ГРН/КГ</small></div>
+                    <a href="#contact" class="btn-primary" style="background: var(--white); color: var(--deep-black);">Бронювати</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="contact-section" id="contact">
-    <div class="container">
-        <h2>Контакти</h2>
-        <p>м. Кривий Ріг</p>
-        <p>+38 (067) 123-45-67</p>
-    </div>
-</section>
+    <section class="catalog" id="catalog">
+        <div class="container">
+            <div class="section-header" data-aos>
+                <h2>Вишуканий асортимент</h2>
+            </div>
+            <div class="product-grid">
+                <div class="product-card" data-aos>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800" alt="Стейк" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="card-body">
+                        <h3>Рібай на кістці</h3>
+                        <p>Максимальна мармуровість та соковитість для справжніх гурманів.</p>
+                        <div class="card-footer">
+                            <span class="price">450 <small style="font-size: 0.6em;">грн/кг</small></span>
+                            <button class="btn-buy">ДОДАТИ</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-aos>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?q=80&w=800" alt="Качка" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="card-body">
+                        <h3>Грудка Магре</h3>
+                        <p>Делікатне м'ясо з тонким шаром жиру. Ідеально з ягідним соусом.</p>
+                        <div class="card-footer">
+                            <span class="price">320 <small style="font-size: 0.6em;">грн/кг</small></span>
+                            <button class="btn-buy">ДОДАТИ</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-aos>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=800" alt="Бургер" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="card-body">
+                        <h3>Сет для бургерів</h3>
+                        <p>4 соковиті котлети з витриманої яловичини. Ресторан вдома.</p>
+                        <div class="card-footer">
+                            <span class="price">285 <small style="font-size: 0.6em;">грн/сет</small></span>
+                            <button class="btn-buy">ДОДАТИ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form" data-aos>
+                    <h2 style="font-family: 'Bitter', serif; font-size: 2.5rem; margin-bottom: 40px;">Замовити</h2>
+                    <form>
+                        <input type="text" placeholder="ВАШЕ ІМ'Я" required>
+                        <input type="tel" placeholder="НОМЕР ТЕЛЕФОНУ" required>
+                        <textarea rows="4" placeholder="ПЕРЕЛІК ТОВАРІВ"></textarea>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Відправити замовлення</button>
+                    </form>
+                </div>
+                <div class="contact-info" data-aos>
+                    <h3 style="color:var(--primary-red); font-family:'Bitter'; font-size:2rem; margin-bottom:20px;">Контакти</h3>
+                    <p>м. Кривий Ріг, вул. Центральна, 45</p>
+                    <p>+38 (067) 123-45-67</p>
+                    <div style="margin-top: 40px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; border-left: 4px solid var(--primary-red);">
+                        <span style="color: #444; font-weight: 800;">GOOGLE MAPS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer>
-    <p>© 2026 М'ясна Лавка. Всі права захищені.</p>
+    <div class="container">
+        <div style="font-family:'Bitter'; color:white; font-size:1.5rem; margin-bottom:10px;">М'ЯСНА ЛАВКА</div>
+        <p>&copy; 2026 Всі права захищені. Преміальна якість.</p>
+    </div>
 </footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
